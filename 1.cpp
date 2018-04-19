@@ -27,6 +27,24 @@ struct flight
 
 // Flight
 
+void sort_f()
+{
+	string tmp;
+	int temp;
+	for(int i=0;i<=2;i++)
+	{
+		int k = i;
+		while((k>0) and (data_f.wilayah[k][0]<data_f.wilayah[k-1][0]))
+		{
+			tmp = data_f.wilayah[k][0];
+			data_f.wilayah[k][0] = data_f.wilayah[k-1][0];
+			data_f.wilayah[k-1][0] = tmp;
+			
+			k = k-1;
+		}
+	}
+}
+
 void data_flight()
 {
 	ifstream asal("Data/Flight/asal.txt");
@@ -75,14 +93,14 @@ void list_f()
 		}
 	}
 	cout<<"+======================================+"<<endl;
-	cout<<"|1. Urutkan Berdasarkan Kota           |"<<endl;
+	cout<<"|1. Urutkan Berdasarkan asal           |"<<endl;
 	cout<<"|2. Kembali                            |"<<endl;
 	cout<<"+======================================+"<<endl;
 	cout<<"Pilihan : ";cin>>pilihan;
 	
 	switch(pilihan)
 	{
-		//case 1 : sort_f();goto a;break;
+		case 1 : sort_f();goto a;break;
 		case 2 : return;break;
 		default : cout<<"Masukan Salah !!";getch();system("cls");break;
 	}
