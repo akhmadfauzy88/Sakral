@@ -31,7 +31,7 @@ void sort_f()
 {
 	string tmp;
 	int temp;
-	for(int i=0;i<=2;i++)
+	for(int i=0;i<=6;i++)
 	{
 		int k = i;
 		while((k>0) and (data_f.wilayah[k][0]<data_f.wilayah[k-1][0]))
@@ -39,6 +39,22 @@ void sort_f()
 			tmp = data_f.wilayah[k][0];
 			data_f.wilayah[k][0] = data_f.wilayah[k-1][0];
 			data_f.wilayah[k-1][0] = tmp;
+			
+			tmp = data_f.wilayah[k][1];
+			data_f.wilayah[k][1] = data_f.wilayah[k-1][1];
+			data_f.wilayah[k-1][1] = tmp;
+			
+			tmp = data_f.waktu[k][0];
+			data_f.waktu[k][0] = data_f.waktu[k-1][0];
+			data_f.waktu[k-1][0] = tmp;
+			
+			tmp = data_f.waktu[k][1];
+			data_f.waktu[k][1] = data_f.waktu[k-1][1];
+			data_f.waktu[k-1][1] = tmp;
+			
+			temp = data_f.harga[k];
+			data_f.harga[k] = data_f.harga[k-1];
+			data_f.harga[k-1] = temp;
 			
 			k = k-1;
 		}
@@ -86,7 +102,7 @@ void list_f()
 	
 	for(int i=1;i<100;i=i+2)
 	{
-		if(data_f.wilayah[i][0]!="")
+		if(data_f.wilayah[i][0]!="" and data_f.wilayah[i][1]!="")
 		{
 			cout<<i<<". "<<data_f.wilayah[i][0]<<" - "<<data_f.wilayah[i][1]<<" LA211QZ "<<data_f.waktu[i][0]<<" WIB - "<<data_f.waktu[i][1]<<" WIB "<<"Rp."<<data_f.harga[i]<<endl;
 			cout<<i+1<<". "<<data_f.wilayah[i+1][0]<<" - "<<data_f.wilayah[i+1][1]<<" GIA2312 "<<data_f.waktu[i+1][0]<<" WIB - "<<data_f.waktu[i+1][1]<<" WIB "<<"Rp."<<data_f.harga[i+1]<<endl;
@@ -108,7 +124,25 @@ void list_f()
 
 void cari_f()
 {
+	string asal, tujuan;
 	
+	system("cls");
+	cout<<"+======================================+"<<endl;
+	cout<<"|Menu pemesanan tiket                  |"<<endl;
+	cout<<"+======================================+"<<endl;
+	cout<<"Masukan kota asal   : ";cin>>asal;
+	cout<<"Masukan kota tujuan : ";cin>>tujuan;
+	
+	for(int i=1;i<100;i++)
+	{
+		if(asal == data_f.wilayah[i][0] and tujuan == data_f.wilayah[i][1])
+		{
+			cout<<i<<". "<<data_f.wilayah[i][0]<<" - "<<data_f.wilayah[i][1]<<" LA211QZ "<<data_f.waktu[i][0]<<" WIB - "<<data_f.waktu[i][1]<<" WIB "<<"Rp."<<data_f.harga[i]<<endl;
+			cout<<i+1<<". "<<data_f.wilayah[i+1][0]<<" - "<<data_f.wilayah[i+1][1]<<" GIA2312 "<<data_f.waktu[i+1][0]<<" WIB - "<<data_f.waktu[i+1][1]<<" WIB "<<"Rp."<<data_f.harga[i+1]<<endl;
+		}
+	}
+	
+	system("pause");
 }
 
 void flight()
@@ -337,6 +371,16 @@ void hotel()
 	cout<<"+======================================+"<<endl;
 	cout<<"Pilihan : ";cin>>pilihan;
 	
+	if(cin.fail())
+	{
+		cin.clear();
+		cin.ignore();
+		cout<<"Masukan salah !!";
+		getch();
+		system("cls");
+		goto a;
+	}
+		
 	switch(pilihan)
 	{
 		case 1 : list_h();break;
@@ -439,6 +483,7 @@ void login()
 {
 	string username, password;
 	
+	system("cls");
 	cout<<"+======================================+"<<endl;
 	cout<<"|Masukan Username dan Password Anda    |"<<endl;
 	cout<<"+======================================+"<<endl;
