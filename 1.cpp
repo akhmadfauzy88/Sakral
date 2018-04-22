@@ -122,9 +122,16 @@ void list_f()
 	}
 }
 
+void pay_flight(int &total, int harga)
+{
+	total = harga+50000;
+}
+
 void cari_f()
 {
-	string asal, tujuan;
+	string asal, tujuan, bul, nama;
+	int pil,a,b, harga;
+	int pax,tgl1;
 	
 	system("cls");
 	cout<<"+======================================+"<<endl;
@@ -132,13 +139,78 @@ void cari_f()
 	cout<<"+======================================+"<<endl;
 	cout<<"Masukan kota asal   : ";cin>>asal;
 	cout<<"Masukan kota tujuan : ";cin>>tujuan;
-	
-	for(int i=1;i<100;i++)
+	int i;
+	for(i=1;i<100;i++)
 	{
 		if(asal == data_f.wilayah[i][0] and tujuan == data_f.wilayah[i][1])
 		{
-			cout<<i<<". "<<data_f.wilayah[i][0]<<" - "<<data_f.wilayah[i][1]<<" LA211QZ "<<data_f.waktu[i][0]<<" WIB - "<<data_f.waktu[i][1]<<" WIB "<<"Rp."<<data_f.harga[i]<<endl;
-			cout<<i+1<<". "<<data_f.wilayah[i+1][0]<<" - "<<data_f.wilayah[i+1][1]<<" GIA2312 "<<data_f.waktu[i+1][0]<<" WIB - "<<data_f.waktu[i+1][1]<<" WIB "<<"Rp."<<data_f.harga[i+1]<<endl;
+			cout<<"======================================================================="<<endl;
+			cout<<"1. "<<data_f.wilayah[i][0]<<" - "<<data_f.wilayah[i][1]<<" LA211QZ "<<data_f.waktu[i][0]<<" WIB - "<<data_f.waktu[i][1]<<" WIB "<<"Rp."<<data_f.harga[i]<<endl;
+			cout<<"2. "<<data_f.wilayah[i+1][0]<<" - "<<data_f.wilayah[i+1][1]<<" GIA2312 "<<data_f.waktu[i+1][0]<<" WIB - "<<data_f.waktu[i+1][1]<<" WIB "<<"Rp."<<data_f.harga[i+1]<<endl;
+			cout<<"======================================================================="<<endl;
+			break;
+		}
+	}
+	
+	cout<<"======================================================================="<<endl;
+	cout<<"Masukkan pilihan anda : ";cin>>pil;
+	cout<<"======================================================================="<<endl;
+	
+	if(pil==1){
+		cout<<"Masukkan Nama Pemesan : ";cin>>nama;
+		cout<<"Masukkan Jumlah Penumpang (diatas 5th in charge) MAX 2: ";cin>>pax;
+		cout<<"Masukkan Tanggal Keberangkatan : ";cin>>tgl1;
+		cout<<"Masukkan Bulan Keberangkatan : ";cin>>bul;
+		cout<<"==================================================================="<<endl;
+		pay_flight(harga, data_f.harga[i]);
+		if(pax==1){
+			cout<<"Atas Nama : "<<nama<<endl;
+			cout<<"Melakukan Pemesanan Tanggal : "<<tgl1<<" "<<bul<<endl;
+			cout<<"Sebanyak "<<pax<<" penumpang"<<endl;
+			cout<<"Total Biaya (inc. Pajak) : "<<harga<<endl;
+			cout<<"Masukkan Nominal yang ingin anda bayarkan : ";cin>>a;
+			cout<<"=============================================================="<<endl;
+			cout<<"T E R I M A   K A S I H"<<endl;
+			cout<<"Cashback sebesar : Rp."<<a-(harga)<<" dimasukkan ke rekening anda "<<endl;
+		}
+		else if(pax==2){
+			cout<<"Atas Nama : "<<nama<<endl;
+			cout<<"Melakukan Pemesanan Tanggal : "<<tgl1<<" "<<bul<<endl;
+			cout<<"Sebanyak "<<pax<<" penumpang"<<endl;
+			cout<<"Total Biaya (inc. Pajak) : "<<harga*2<<endl;
+			cout<<"Masukkan Nominal yang ingin anda bayarkan : ";cin>>a;
+			cout<<"=============================================================="<<endl;
+			cout<<"T E R I M A   K A S I H"<<endl;
+			cout<<"Cashback sebesar : Rp."<<a-(harga*2)<<" dimasukkan ke rekening anda "<<endl;
+		}
+	}
+	
+	if(pil==2){
+		cout<<"Masukkan Nama Pemesan : ";cin>>nama;
+		cout<<"Masukkan Jumlah Penumpang (diatas 5th in charge) MAX 2: ";cin>>pax;
+		cout<<"Masukkan Tanggal Keberangkatan : ";cin>>tgl1;
+		cout<<"Masukkan Bulan Keberangkatan : ";cin>>bul;
+		cout<<"==================================================================="<<endl;
+		pay_flight(harga, data_f.harga[i+1]);
+		if(pax==1){
+			cout<<"Atas Nama : "<<nama<<endl;
+			cout<<"Melakukan Pemesanan Tanggal : "<<tgl1<<" "<<bul<<endl;
+			cout<<"Sebanyak "<<pax<<" penumpang"<<endl;
+			cout<<"Total Biaya (inc. Pajak) : "<<harga<<endl;
+			cout<<"Masukkan Nominal yang ingin anda bayarkan : ";cin>>a;
+			cout<<"=============================================================="<<endl;
+			cout<<"T E R I M A   K A S I H"<<endl;
+			cout<<"Cashback sebesar : Rp."<<a-(harga)<<" dimasukkan ke rekening anda "<<endl;
+		}
+		else if(pax==2){
+			cout<<"Atas Nama : "<<nama<<endl;
+			cout<<"Melakukan Pemesanan Tanggal : "<<tgl1<<" "<<bul<<endl;
+			cout<<"Sebanyak "<<pax<<" penumpang"<<endl;
+			cout<<"Total Biaya (inc. Pajak) : "<<harga*2<<endl;
+			cout<<"Masukkan Nominal yang ingin anda bayarkan : ";cin>>a;
+			cout<<"=============================================================="<<endl;
+			cout<<"T E R I M A   K A S I H"<<endl;
+			cout<<"Cashback sebesar : Rp."<<a-(harga*2)<<" dimasukkan ke rekening anda "<<endl;
 		}
 	}
 	
