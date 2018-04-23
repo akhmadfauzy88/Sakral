@@ -492,7 +492,8 @@ void main_menu(string username)
 		cout<<"|Main Menu Travel Agent                |"<<endl;
 		cout<<"+======================================+"<<endl;
 		cout<<"|1. Hotel - 2. Flight - 3. Riwayat     |"<<endl;
-		cout<<"|4. Logout                             |"<<endl;
+		cout<<"|4. Logout                             |"<<endl; 
+		cout<<"|(Versi beta, belum tersedia riwayat)  |"<<endl;
 		cout<<"+======================================+"<<endl;
 		cout<<"Pilihan : ";cin>>pilihan;
 		
@@ -646,7 +647,7 @@ void order(int pilihan)
 
 int main()
 {
-	system("Title Travel Agent v2 By Kelompok 1");
+	system("Title Travel Agent v2 By Kelompok 1 Beta");
 	system("Color 17");
 	
 	transfer_data_login();
