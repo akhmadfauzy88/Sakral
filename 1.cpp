@@ -25,6 +25,82 @@ struct flight
 	int harga[100];
 }data_f;
 
+struct rw{
+	string nama, kota, cekin, cekot, bulan, total;
+}riwayat[1024];
+
+// Riwayat
+
+void riwayat_tranksasi_read(string username)
+{
+	ifstream riwayat1("Data/Log/riwayat-nama.log");
+	ifstream riwayat2("Data/Log/riwayat-kota.log");
+	ifstream riwayat3("Data/Log/riwayat-cekin.log");
+	ifstream riwayat4("Data/Log/riwayat-cekot.log");
+	ifstream riwayat5("Data/Log/riwayat-bulan.log");
+	ifstream riwayat6("Data/Log/riwayat-total.log");
+	
+	for(int k=1;k<1024;k++)
+	{
+		getline(riwayat1, riwayat[k].nama);
+		getline(riwayat2, riwayat[k].kota);
+		getline(riwayat3, riwayat[k].cekin);
+		getline(riwayat4, riwayat[k].cekot);
+		getline(riwayat5, riwayat[k].bulan);
+		getline(riwayat6, riwayat[k].total);
+	}
+	
+	for(int i=1;i<1024;i++)
+	{
+		if(riwayat[i].nama==username)
+		{
+			cout<<"Nama tamu   : "<<riwayat[i].nama<<endl;
+			cout<<"Kota        : "<<riwayat[i].kota<<endl;
+			cout<<"Check in    : "<<riwayat[i].cekin<<endl;
+			cout<<"Check out   : "<<riwayat[i].cekot<<endl;
+			cout<<"Bulan       : "<<riwayat[i].bulan<<endl;
+			cout<<"Total Biaya : "<<riwayat[i].total<<endl<<endl;
+		}
+	}
+	
+	cout<<endl;
+	
+	riwayat1.close();
+	riwayat2.close();
+	riwayat3.close();
+	riwayat4.close();
+	riwayat5.close();
+	riwayat6.close();
+	
+	system("pause");
+}
+
+void riwayat_tranksasi_write(string nama, string kota, int cekin, int cekot, string bulan, int total)
+{
+	ofstream riwayat1("Data/Log/riwayat-nama.log", ios::app);
+	ofstream riwayat2("Data/Log/riwayat-kota.log", ios::app);
+	ofstream riwayat3("Data/Log/riwayat-cekin.log", ios::app);
+	ofstream riwayat4("Data/Log/riwayat-cekot.log", ios::app);
+	ofstream riwayat5("Data/Log/riwayat-bulan.log", ios::app);
+	ofstream riwayat6("Data/Log/riwayat-total.log", ios::app);
+	
+	riwayat1 << nama <<endl;
+	riwayat2 << kota <<endl;
+	riwayat3 << cekin <<endl;
+	riwayat4 << cekot <<endl;
+	riwayat5 << bulan <<endl;
+	riwayat6 << total <<endl;
+	
+	riwayat1.close();
+	riwayat2.close();
+	riwayat3.close();
+	riwayat4.close();
+	riwayat5.close();
+	riwayat6.close();
+}
+
+// End Riwayat
+
 // Flight
 
 void sort_f()
@@ -424,6 +500,8 @@ void cari_h()
 		}
 	}
 	
+	riwayat_tranksasi_write(tamu, kota, cekin, cekot, bulan, total);
+	
 	getch();
 }
 
@@ -469,13 +547,13 @@ void hotel()
 
 // Statement Main Menu
 
-void main_order(int pilihan)
+void main_order(int pilihan, string username)
 {
 	switch(pilihan)
 	{
 		case 1 : hotel();break;
 		case 2 : flight();break;
-		case 3 : break;
+		case 3 : riwayat_tranksasi_read(username);break;
 		default : cout<<"Masukan Salah !!";getch();system("cls");break;
 	}
 }
@@ -509,7 +587,7 @@ void main_menu(string username)
 		
 		if(pilihan==4) return;
 		
-		main_order(pilihan);
+		main_order(pilihan, username);
 	goto a;
 }
 
