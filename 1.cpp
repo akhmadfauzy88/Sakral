@@ -26,13 +26,17 @@ struct flight
 }data_f;
 
 struct rw{
-	string nama, kota, cekin, cekot, bulan, total;
+	string nama, kota, cekin, cekot, bulan, total, username;
 }riwayat[1024];
 
+struct rw1{
+	string name, kota_tujuan, kota_asal, pax, waktu, total, username;
+}riwayat_f[1024];
 // Riwayat
 
 void riwayat_tranksasi_read(string username)
 {
+	ifstream riwayat0("Data/Log/riwayat-username.log");
 	ifstream riwayat1("Data/Log/riwayat-nama.log");
 	ifstream riwayat2("Data/Log/riwayat-kota.log");
 	ifstream riwayat3("Data/Log/riwayat-cekin.log");
@@ -42,6 +46,7 @@ void riwayat_tranksasi_read(string username)
 	
 	for(int k=1;k<1024;k++)
 	{
+		getline(riwayat0, riwayat[k].username);
 		getline(riwayat1, riwayat[k].nama);
 		getline(riwayat2, riwayat[k].kota);
 		getline(riwayat3, riwayat[k].cekin);
@@ -50,9 +55,15 @@ void riwayat_tranksasi_read(string username)
 		getline(riwayat6, riwayat[k].total);
 	}
 	
+	system("cls");
+	cout<<"+==============================================+"<<endl;
+	cout<<"|Riwayat tranksasi anda                        |"<<endl;
+	cout<<"+==============================================+"<<endl;
+	cout<<endl;
+	
 	for(int i=1;i<1024;i++)
 	{
-		if(riwayat[i].nama==username)
+		if(riwayat[i].username==username)
 		{
 			cout<<"Nama tamu   : "<<riwayat[i].nama<<endl;
 			cout<<"Kota        : "<<riwayat[i].kota<<endl;
@@ -65,6 +76,7 @@ void riwayat_tranksasi_read(string username)
 	
 	cout<<endl;
 	
+	riwayat0.close();
 	riwayat1.close();
 	riwayat2.close();
 	riwayat3.close();
@@ -75,8 +87,9 @@ void riwayat_tranksasi_read(string username)
 	system("pause");
 }
 
-void riwayat_tranksasi_write(string nama, string kota, int cekin, int cekot, string bulan, int total)
+void riwayat_tranksasi_write(string nama, string kota, int cekin, int cekot, string bulan, int total, string username)
 {
+	ofstream riwayat0("Data/Log/riwayat-username.log", ios::app);
 	ofstream riwayat1("Data/Log/riwayat-nama.log", ios::app);
 	ofstream riwayat2("Data/Log/riwayat-kota.log", ios::app);
 	ofstream riwayat3("Data/Log/riwayat-cekin.log", ios::app);
@@ -84,6 +97,7 @@ void riwayat_tranksasi_write(string nama, string kota, int cekin, int cekot, str
 	ofstream riwayat5("Data/Log/riwayat-bulan.log", ios::app);
 	ofstream riwayat6("Data/Log/riwayat-total.log", ios::app);
 	
+	riwayat0 << username <<endl;
 	riwayat1 << nama <<endl;
 	riwayat2 << kota <<endl;
 	riwayat3 << cekin <<endl;
@@ -91,6 +105,7 @@ void riwayat_tranksasi_write(string nama, string kota, int cekin, int cekot, str
 	riwayat5 << bulan <<endl;
 	riwayat6 << total <<endl;
 	
+	riwayat0.close();
 	riwayat1.close();
 	riwayat2.close();
 	riwayat3.close();
@@ -404,7 +419,7 @@ void pay(int &total, int cekin, int cekot, int harga)
 	total = ((cekot-cekin) * harga)+50000;
 }
 
-void cari_h()
+void cari_h(string username)
 {
 	string kota, bulan, tamu;
 	int cekin, cekot;
@@ -500,12 +515,12 @@ void cari_h()
 		}
 	}
 	
-	riwayat_tranksasi_write(tamu, kota, cekin, cekot, bulan, total);
+	riwayat_tranksasi_write(tamu, kota, cekin, cekot, bulan, total, username);
 	
 	getch();
 }
 
-void hotel()
+void hotel(string username)
 {
 	int pilihan;
 	data_hotel();
@@ -534,7 +549,7 @@ void hotel()
 	switch(pilihan)
 	{
 		case 1 : list_h();break;
-		case 2 : cari_h();break;
+		case 2 : cari_h(username);break;
 		case 3 : return;break;
 		default : cout<<"Masukan Salah !!";getch();system("cls");break;
 	}
@@ -551,7 +566,7 @@ void main_order(int pilihan, string username)
 {
 	switch(pilihan)
 	{
-		case 1 : hotel();break;
+		case 1 : hotel(username);break;
 		case 2 : flight();break;
 		case 3 : riwayat_tranksasi_read(username);break;
 		default : cout<<"Masukan Salah !!";getch();system("cls");break;
