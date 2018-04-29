@@ -285,10 +285,44 @@ void list_f()
 	cout<<"|2. Kembali                            |"<<endl;
 	cout<<"+======================================+"<<endl;
 	cout<<"Pilihan : ";cin>>pilihan;
-	
+	b:
 	switch(pilihan)
 	{
-		case 1 : sort_f();goto a;break;
+		case 1 : {
+			int pl;
+			system("cls");
+			cout<<"+====================================+"<<endl;
+			cout<<"|Sorting                             |"<<endl;
+			cout<<"|1. Asc - 2. Desc                    |"<<endl;
+			cout<<"+====================================+"<<endl;
+			sort_f();
+			cout<<"Pilihan : ";cin>>pl;
+			if(pl==1) goto a;
+			else if (pl==2){
+				system("cls");
+				cout<<"+======================================+"<<endl;
+				cout<<"|Daftar Penerbangan yang tersedia      |"<<endl;
+				cout<<"+======================================+"<<endl;
+				int ctr=1;
+				for(int i=100;i>1;i=i-2)
+				{
+					if(data_f.wilayah[i][0]!="" and data_f.wilayah[i][1]!="")
+					{
+						cout<<ctr<<". "<<data_f.wilayah[i][0]<<" - "<<data_f.wilayah[i][1]<<" LA211QZ "<<data_f.waktu[i][0]<<" WIB - "<<data_f.waktu[i][1]<<" WIB "<<"Rp."<<data_f.harga[i]<<endl;
+						cout<<ctr+1<<". "<<data_f.wilayah[i-1][0]<<" - "<<data_f.wilayah[i-1][1]<<" GIA2312 "<<data_f.waktu[i-1][0]<<" WIB - "<<data_f.waktu[i-1][1]<<" WIB "<<"Rp."<<data_f.harga[i-1]<<endl;
+						cout<<endl;
+						ctr=ctr+2;
+					}
+				}
+				cout<<"+======================================+"<<endl;
+				cout<<"|1. Urutkan Berdasarkan asal           |"<<endl;
+				cout<<"|2. Kembali                            |"<<endl;
+				cout<<"+======================================+"<<endl;
+				cout<<"Pilihan : ";cin>>pilihan;
+				goto b;
+			}
+			break;
+		}//sort_f();goto a;break;
 		case 2 : return;break;
 		default : cout<<"Masukan Salah !!";getch();system("cls");break;
 	}
@@ -549,10 +583,44 @@ void list_h()
 	cout<<"|2. Kembali                            |"<<endl;
 	cout<<"+======================================+"<<endl;
 	cout<<"Pilihan : ";cin>>pilihan;
-	
+	b:
 	switch(pilihan)
 	{
-		case 1 : sort_h();goto a;break;
+		case 1 : {
+			int pl;
+			system("cls");
+			cout<<"+====================================+"<<endl;
+			cout<<"|Sorting                             |"<<endl;
+			cout<<"|1. Asc - 2. Desc                    |"<<endl;
+			cout<<"+====================================+"<<endl;
+			sort_h();
+			cout<<"Pilihan : ";cin>>pl;
+			if(pl==1) goto a;
+			else if(pl==2){
+				system("cls");
+				cout<<"+======================================+"<<endl;
+				cout<<"|Daftar Hotel yang tersedia            |"<<endl;
+				cout<<"+======================================+"<<endl;
+				int ctr=1;
+				for(int i=98;i>1;i=i-2)
+				{
+					if(data_h.wilayah[i][0]!="")
+					{
+						cout<<ctr<<". Nusa Indah kota   "<<data_h.wilayah[i][0]<<"        "<<"Rp."<<data_h.harga[i]<<endl;
+						cout<<ctr+1<<". Wisma Nyaman kota "<<data_h.wilayah[i-1][0]<<"        "<<"Rp."<<data_h.harga[i-1]<<endl;
+						cout<<endl;
+						ctr=ctr+2;
+					}
+				}
+				cout<<"+======================================+"<<endl;
+				cout<<"|1. Urutkan Berdasarkan Kota           |"<<endl;
+				cout<<"|2. Kembali                            |"<<endl;
+				cout<<"+======================================+"<<endl;
+				cout<<"Pilihan : ";cin>>pilihan;
+				goto b;
+			}
+			break;
+		}//sort_h();goto a;break;
 		case 2 : return;break;
 		default : cout<<"Masukan Salah !!";getch();system("cls");break;
 	}
